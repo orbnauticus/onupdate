@@ -3,6 +3,7 @@
 import argparse
 import logging
 import os
+import time
 
 from .watch import Watcher, shell_function
 
