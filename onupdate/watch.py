@@ -1,7 +1,8 @@
 
 import os
-from pyinotify import WatchManager, Notifier, ThreadedNotifier, EventsCodes, ProcessEvent
-from subprocess import Popen,PIPE
+from pyinotify import (WatchManager, Notifier, ThreadedNotifier, EventsCodes,
+                       ProcessEvent)
+from subprocess import Popen, PIPE
 import time
 
 import logging
@@ -25,7 +26,8 @@ class Event(ProcessEvent):
                           EventsCodes.ALL_FLAGS['IN_MODIFY']):
             if event.pathname == self.watcher.path:
                 pass
-            elif self.watcher.recursive and event.pathname.startswith(self.watcher.folder):
+            elif (self.watcher.recursive and
+                  event.pathname.startswith(self.watcher.folder)):
                 pass
             else:
                 return
@@ -49,7 +51,7 @@ class Watcher(object):
         self.first_run = first_run
         self.delay = delay
         self.sensitivity = sensitivity
-        
+
         self.function = function
 
         self.watchmanager = WatchManager()
@@ -78,4 +80,3 @@ class Watcher(object):
             except KeyboardInterrupt:
                 notifier.stop()
                 break
-

@@ -25,9 +25,7 @@ args = parser.parse_args()
 args.path = os.path.abspath(args.path)
 
 if args.verbose:
-    args.show_cmd = \
-    args.show_time = \
-    args.show_exit = True
+    args.show_cmd = args.show_time = args.show_exit = True
 
 args.show_count = True
 
@@ -36,6 +34,7 @@ args.delay = 0.1
 logger = logging.getLogger('onupdate')
 logging.basicConfig(level=logging.INFO)
 
+
 @Watcher(args.path, args.recursive, args.first_run, delay=args.delay,
          sensitivity=args.sensitivity)
 def watcher():
@@ -43,7 +42,7 @@ def watcher():
         logger.info("Running %s", ' '.join(args.command))
     if args.show_time:
         logger.info("Execution began at %s",
-            time.strftime('[%Y-%m-%d %H:%M:%S]'))
+                    time.strftime('[%Y-%m-%d %H:%M:%S]'))
     result = shell_function(args.command)
     if args.show_exit:
         logger.info("Command exited with status %i", result)
